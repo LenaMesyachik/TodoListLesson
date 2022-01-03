@@ -31,8 +31,12 @@ export const App = () => {
 
     const addTask = (title: string) => {
         const task = {id: v1(), title: title, isDone: true}
-        const newTasks = [...tasks, task]
-        setTasks(newTasks)
+        setTasks([...tasks, task])
+    }
+
+    const changeStatus = (tID:string, isDone: boolean) => {
+        setTasks (tasks.map(t => t.id === tID ? {...t, isDone: isDone} : t ))
+
     }
 
 
@@ -42,7 +46,8 @@ export const App = () => {
                       tasks={tasksForTodoList}
                       removeTask={removeTask}
                       addTask={addTask}
-                      changeFilter = {changeFilter}/>
+                      changeFilter = {changeFilter}
+                      changeStatus={changeStatus}/>
         </div>
     )
 }
