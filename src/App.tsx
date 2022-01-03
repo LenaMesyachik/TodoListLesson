@@ -9,6 +9,14 @@ export type TodoListType = {
     title: string,
     filter: FilterValueType
 }
+type TaskType = {
+    id: string
+    title: string,
+    isDone: boolean,
+}
+export type TasksStateType = {
+    [key:string] : TaskType[]
+}
 export const App = () => {
     const todoListID1 = v1()
     const todoListID2 = v1()
@@ -18,7 +26,7 @@ export const App = () => {
         {id: todoListID2, title: 'What to buy', filter: 'all'},
     ])
 
-    const [tasks, setTasks] = useState({
+    const [tasks, setTasks] = useState <TasksStateType>({
         [todoListID1]: [
             {id: v1(), title: 'CSS & HTML', isDone: true},
             {id: v1(), title: 'js', isDone: true},
@@ -48,7 +56,10 @@ export const App = () => {
             setTodoLists([...todoLists])
         }
     }
+const removeTodoList = (id:string) => {
+    setTodoLists([...todoLists.filter(t => t.id !== id)])
 
+}
     return (
         <div className='App'>
             {todoLists.map(t => {
@@ -69,7 +80,8 @@ export const App = () => {
                             addTask={addTask}
                             changeFilter={changeFilter}
                             changeStatus={changeStatus}
-                            filter={t.filter}/>)
+                            filter={t.filter}
+                            removeTodoList = {removeTodoList}/>)
                 }
             )}
         </div>
