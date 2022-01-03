@@ -6,7 +6,9 @@ import {TodoList} from "./TodoList";
 export const  App = () => {
     return (
         <div className='App'>
-        <TodoList/>
+        <TodoList title = 'What to learn'/>
+        <TodoList title = 'What to buy'/>
+        <TodoList title = 'What to watch'/>
         </div>
     )}
 
