@@ -7,7 +7,8 @@ type PropsTodoListType = {
     removeTask: (tID: string) => void,
     addTask: (title: string) => void,
     changeFilter: (filter: FilterValueType) => void,
-    changeStatus: (tID: string, isDone: boolean) => void
+    changeStatus: (tID: string, isDone: boolean) => void,
+    filter: FilterValueType
 }
 type TaskType = {
     id: string
@@ -30,6 +31,7 @@ export const TodoList = (props: PropsTodoListType) => {
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setError('')
         setTitle(e.currentTarget.value)
     }
     const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -55,7 +57,7 @@ export const TodoList = (props: PropsTodoListType) => {
                        onKeyPress={onKeyPress}
                        className={error ? 'error' : ''}
                 />
-                <button onClick={addTask}> +</button>
+                <button onClick={addTask}> + </button>
                 {error && <div className='error-message'>{error}</div>}
             </div>
             <ul>
@@ -74,9 +76,9 @@ export const TodoList = (props: PropsTodoListType) => {
                 )}
             </ul>
             <div>
-                <button onClick={onAllClickHandler}>ALL</button>
-                <button onClick={onActiveClickHandler}>ACTIVE</button>
-                <button onClick={onCompletedClickHandler}>COMPLETED</button>
+                <button className = { props.filter === 'all' ? 'active-filter' : ""} onClick={onAllClickHandler}>ALL</button>
+                <button className = { props.filter === 'active' ? 'active-filter' : ""}onClick={onActiveClickHandler}>ACTIVE</button>
+                <button className = { props.filter === 'completed' ? 'active-filter' : ""}onClick={onCompletedClickHandler}>COMPLETED</button>
             </div>
         </div>
     )
