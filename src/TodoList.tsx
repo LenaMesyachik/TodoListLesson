@@ -7,7 +7,7 @@ type PropsTodoListType = {
     removeTask: (tID: string) => void,
     addTask: (title: string) => void,
     changeFilter: (filter: FilterValueType) => void,
-    changeStatus:(tID:string, isDone: boolean) => void
+    changeStatus: (tID: string, isDone: boolean) => void
 }
 type TaskType = {
     id: string
@@ -18,11 +18,17 @@ type TaskType = {
 export const TodoList = (props: PropsTodoListType) => {
 
     const [title, setTitle] = useState('')
+    const [error, setError] = useState('')
+
     const addTask = () => {
         if (title.trim() !== '') {
-        props.addTask(title)
-        setTitle('')
-    }}
+            props.addTask(title)
+            setTitle('')
+        } else {
+            setError('Title is required!')
+        }
+    }
+
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
@@ -47,14 +53,17 @@ export const TodoList = (props: PropsTodoListType) => {
             <div>
                 <input value={title} onChange={onChangeHandler}
                        onKeyPress={onKeyPress}
+                       className={error ? 'error' : ''}
                 />
                 <button onClick={addTask}> +</button>
+                {error && <div className='error-message'>{error}</div>}
             </div>
             <ul>
                 {props.tasks.map(t => {
-                    const onClickHandler = () => props.removeTask(t.id)
-                    const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => { props.changeStatus (t.id, e.currentTarget.checked)
-                    }
+                        const onClickHandler = () => props.removeTask(t.id)
+                        const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+                            props.changeStatus(t.id, e.currentTarget.checked)
+                        }
                         return (
                             <li key={t.id}>
                                 <input type='checkbox' onChange={onChangeHandler} checked={t.isDone}/>
