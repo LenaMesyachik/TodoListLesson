@@ -2,6 +2,8 @@ import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
 import {FilterValueType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
+import {IconButton} from "@material-ui/core";
+import {Delete} from "@material-ui/icons";
 
 type PropsTodoListType = {
     id: string,
@@ -34,12 +36,16 @@ export const TodoList = (props: PropsTodoListType) => {
     const onCompletedClickHandler = () => {
         props.changeFilter('completed', props.id)
     }
-
+const onClickDeleteTodoList = () => {
+    props.removeTodoList(props.id)
+}
 
     return (
         <div>
             <h3> <EditableSpan value={props.title}/>
-                <button onClick={() => props.removeTodoList(props.id)}> x</button>
+                <IconButton aria-label="delete" onClick={onClickDeleteTodoList}>
+                    <Delete />
+                </IconButton>
             </h3>
             <AddItemForm addTask={addTask}/>
             <ul>
@@ -52,7 +58,9 @@ export const TodoList = (props: PropsTodoListType) => {
                             <li key={t.id} className={t.isDone ? 'is-done' : ''}>
                                 <input type='checkbox' onChange={onChangeHandler} checked={t.isDone}/>
                                 <EditableSpan value={t.title}/>
-                                <button onClick={onClickHandler}> x</button>
+                                <IconButton aria-label="delete" onClick={onClickHandler}>
+                                    <Delete />
+                                </IconButton>
                             </li>
                         )
                     }
