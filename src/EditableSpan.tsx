@@ -4,6 +4,7 @@ import {TextField} from "@material-ui/core";
 
 export type EditableSpanPropsType = {
     value: string
+    onChange:(title:string) => void
 }
 export const EditableSpan = (props: EditableSpanPropsType) => {
 
@@ -14,9 +15,11 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
 
     const activateEditMode = () => {
         setEditMode(true)
+        setTitle(title)
     }
     const activateViewMode = () => {
         setEditMode(false)
+        props.onChange(title)
     }
     const changeTitle = (e:ChangeEvent<HTMLInputElement>) => {
        setTitle(e.currentTarget.value)

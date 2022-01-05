@@ -52,6 +52,10 @@ export const App = () => {
     const changeStatus = (tID: string, isDone: boolean, todoListID: string) => {
         setTasks({...tasks, [todoListID]: [...tasks[todoListID].map(t => t.id === tID ? {...t, isDone: isDone} : t)]})
     }
+    const changeTaskTitle = (title:string, tID: string,todoListID: string) => {
+        setTasks({...tasks, [todoListID]: [...tasks[todoListID].map(t => t.id === tID ? {...t, title:title} : t)]} )
+    }
+
     const changeFilter = (value: FilterValueType, todoListID: string) => {
         const todoList = todoLists.find(t => t.id === todoListID)
         if (todoList) {
@@ -66,6 +70,10 @@ export const App = () => {
         const todoListID = v1()
         setTodoLists([...todoLists,{id: todoListID, title: title, filter: 'all'}])
         setTasks({...tasks,[todoListID]:[]})
+    }
+    const changeTodoListTitle = (title:string, todoListID: string) => {
+todoLists.map(t => t.id===todoListID)
+        setTodoLists ([...todoLists.map(t => t.id === todoListID ? {...t, title: title} : t  )])
     }
 
 
@@ -108,7 +116,9 @@ export const App = () => {
                             changeFilter={changeFilter}
                             changeStatus={changeStatus}
                             filter={t.filter}
-                            removeTodoList={removeTodoList}/>
+                            removeTodoList={removeTodoList}
+                            changeTaskTitle={changeTaskTitle}
+                            changeTodoListTitle = {changeTodoListTitle}/>
                             </Paper>
                         </Grid>)
                 }

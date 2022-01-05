@@ -14,7 +14,9 @@ type PropsTodoListType = {
     changeFilter: (value: FilterValueType, todoListID: string) => void,
     changeStatus: (tID: string, isDone: boolean, todoListID: string) => void,
     filter: FilterValueType,
-    removeTodoList: (id: string) => void
+    removeTodoList: (id: string) => void,
+    changeTaskTitle: (title: string, tID: string, todoListID: string) => void,
+    changeTodoListTitle: (title:string, todoListID: string) =>  void
 }
 type TaskType = {
     id: string
@@ -36,20 +38,26 @@ export const TodoList = (props: PropsTodoListType) => {
     const onCompletedClickHandler = () => {
         props.changeFilter('completed', props.id)
     }
-const onClickDeleteTodoList = () => {
-    props.removeTodoList(props.id)
-}
+    const onClickDeleteTodoList = () => {
+        props.removeTodoList(props.id)
+    }
+    const onChangeTodolistTitle = (title: string) => {
+        props.changeTodoListTitle (title, props.id)
 
+    }
     return (
         <div>
-            <h3> <EditableSpan value={props.title}/>
+            <h3><EditableSpan value={props.title} onChange={onChangeTodolistTitle}/>
                 <IconButton aria-label="delete" onClick={onClickDeleteTodoList}>
-                    <Delete />
+                    <Delete/>
                 </IconButton>
             </h3>
             <AddItemForm addTask={addTask}/>
             <div>
                 {props.tasks.map(t => {
+                    const onChangeTitle = (title: string) => {
+                        props.changeTaskTitle(title,t.id, props.id)
+                    }
                         const onClickHandler = () => props.removeTask(t.id, props.id)
                         const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
                             props.changeStatus(t.id, e.currentTarget.checked, props.id)
@@ -59,9 +67,9 @@ const onClickDeleteTodoList = () => {
                                 <Checkbox
                                     onChange={onChangeHandler} checked={t.isDone}
                                 />
-                                <EditableSpan value={t.title}/>
+                                <EditableSpan value={t.title} onChange={onChangeTitle}/>
                                 <IconButton aria-label="delete" onClick={onClickHandler}>
-                                    <Delete />
+                                    <Delete/>
                                 </IconButton>
                             </div>
                         )
@@ -69,13 +77,18 @@ const onClickDeleteTodoList = () => {
                 )}
             </div>
             <div>
-                <ButtonGroup variant="contained" aria-label="contained primary button group" disableElevation size='small'
+                <ButtonGroup variant="contained" aria-label="contained primary button group" disableElevation
+                             size='small'
                              style={{
-                                 display:'flex',
-                                 justifyContent: "space-between"}}>
-                    <Button color={props.filter === 'all' ? 'secondary' : 'primary'} onClick={onAllClickHandler}>ALL</Button>
-                    <Button color={props.filter === 'active' ? 'secondary' : 'primary'} onClick={onActiveClickHandler}>ACTIVE</Button>
-                    <Button color={props.filter === 'completed' ? 'secondary' : 'primary'}  onClick={onCompletedClickHandler}>COMPLETED</Button>
+                                 display: 'flex',
+                                 justifyContent: "space-between"
+                             }}>
+                    <Button color={props.filter === 'all' ? 'secondary' : 'primary'}
+                            onClick={onAllClickHandler}>ALL</Button>
+                    <Button color={props.filter === 'active' ? 'secondary' : 'primary'}
+                            onClick={onActiveClickHandler}>ACTIVE</Button>
+                    <Button color={props.filter === 'completed' ? 'secondary' : 'primary'}
+                            onClick={onCompletedClickHandler}>COMPLETED</Button>
                 </ButtonGroup>
             </div>
         </div>
