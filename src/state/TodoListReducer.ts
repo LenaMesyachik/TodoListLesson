@@ -49,7 +49,7 @@ type AddTodoListACType = {
     title: string,
     todoListID: string
 }
-export const addTodoListAC = (title: string) => {
+export const addTodoListAC = (todoListID:string,title: string) => {
     return {type: 'ADD-TODOLIST', title: title, todoListID: v1()} as const
 }
 

@@ -49,13 +49,17 @@ export const taskReducer = (state: TasksStateType = initialState, action: Action
                     } : t)]
                 }
             )
+        case 'TASK-FOR-TODOLIST':
+            return (
+                {...state, [action.todoListID]: []}
+            )
         default:
             return {...state}
     }
 }
 
 
-export type ActionType = RemoveTaskACType | AddTaskACType | ChangeStatusACType | ChangeTaskTitleACType
+export type ActionType = RemoveTaskACType | AddTaskACType | ChangeStatusACType | ChangeTaskTitleACType | addTaskForTodoListACType
 type RemoveTaskACType = {
     type: 'REMOVE-TASK',
     id: string,
@@ -93,7 +97,15 @@ type ChangeTaskTitleACType = {
     title: string
 }
 export const changeTaskTitleAC = (title: string, tID: string, todoListID: string) => {
-    return {type: 'CHANGE-TASK-TITLE',title: title, id: tID, todoListID: todoListID} as const
+    return {type: 'CHANGE-TASK-TITLE', title: title, id: tID, todoListID: todoListID} as const
 }
+
+type addTaskForTodoListACType = {
+    type: 'TASK-FOR-TODOLIST',
+    todoListID: string
+}
+export const addTaskForTodoListAC = (todoListID: string) => { return {type: 'TASK-FOR-TODOLIST', todoListID:todoListID} as const}
+
+
 
 
