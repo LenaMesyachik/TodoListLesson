@@ -93,7 +93,7 @@ type ChangeTaskTitleACType = {
     title: string
 }
 export const changeTaskTitleAC = (title: string, tID: string, todoListID: string) => {
-    return {type: 'CHANGE-TASK-TITLE',title: title, id: tID, todoListID: todoListID}
+    return {type: 'CHANGE-TASK-TITLE',title: title, id: tID, todoListID: todoListID} as const
 }
 
 

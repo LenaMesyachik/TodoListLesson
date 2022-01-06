@@ -5,7 +5,13 @@ import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
-import {changeFilterAC, changeTodoListTitleAC, removeTodoListAC, todoListReducer} from "./state/TodoListReducer";
+import {
+    addTodoListAC,
+    changeFilterAC,
+    changeTodoListTitleAC,
+    removeTodoListAC,
+    todoListReducer
+} from "./state/TodoListReducer";
 import {addTaskAC, changeStatusAC, changeTaskTitleAC, removeTaskAC, taskReducer} from "./state/TaskReducer";
 
 export type FilterValueType = 'all' | 'active' | 'completed'
@@ -74,7 +80,7 @@ const addTodoList = (title: string) => {
      const todoListID = v1()
      /*setTodoLists([...todoLists, {id: todoListID, title: title, filter: 'all'}])
      setTasks({...tasks, [todoListID]: []})*/
-    dispatchTodoList(addTodoList(title, todoListID))
+    dispatchTodoList(addTodoListAC(title))
 }
 
 // const todoListID = v1()
