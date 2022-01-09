@@ -10,8 +10,8 @@ export type TodoListType = {
     filter: FilterValueType
 }
 const initialState:TodoListType[] = [
-    {id: todoListID1, title: 'What to learn', filter: 'all'},
-    {id: todoListID2, title: 'What to buy', filter: 'all'},
+   /* {id: todoListID1, title: 'What to learn', filter: 'all'},
+    {id: todoListID2, title: 'What to buy', filter: 'all'},*/
 ]
 export const todoListReducer = (state:TodoListType[]  = initialState, action: ActionType):TodoListType[]  => {
     switch (action.type) {

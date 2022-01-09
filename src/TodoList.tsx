@@ -60,6 +60,7 @@ export const TodoList = (props: PropsTodoListType) => {
                     }
                         const onClickHandler = () => props.removeTask(t.id, props.id)
                         const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+                        debugger
                             props.changeStatus(t.id, e.currentTarget.checked, props.id)
                         }
                         return (

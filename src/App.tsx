@@ -18,7 +18,7 @@ import {
     changeStatusAC,
     changeTaskTitleAC,
     removeTaskAC,
-    taskReducer
+    taskReducer, TasksStateType
 } from "./state/TaskReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {rootStateType} from "./state/store";
@@ -34,20 +34,12 @@ export type TaskType = {
     title: string,
     isDone: boolean,
 }
-export type TasksStateType = {
-    [key: string]: TaskType[]
-}
+
 export const App = () => {
-    const todoListID1 = v1()
-    const todoListID2 = v1()
 
-const dispatch = useDispatch()
-    const todoLists = useSelector<rootStateType, TodoListType[]>(state => state.todoList)
+    const dispatch = useDispatch()
+    const todoLists = useSelector<rootStateType, TodoListType[]>(state => state.todoLists)
     const tasks = useSelector<rootStateType, TasksStateType>(state => state.tasks)
-    //
-    //
-
-
     /*
         const [todoLists, dispatchTodoList] = useReducer(todoListReducer, [
             {id: todoListID1, title: 'What to learn', filter: 'all'},
