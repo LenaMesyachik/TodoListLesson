@@ -50,7 +50,9 @@ export const taskReducer = (state: TasksStateType = initialState, action: Action
                 }
             )
         case 'TASK-FOR-TODOLIST':
+            debugger
             return (
+
                 {...state, [action.todoListID]: []}
             )
         default:

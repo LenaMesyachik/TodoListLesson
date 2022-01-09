@@ -50,7 +50,7 @@ type AddTodoListACType = {
     todoListID: string
 }
 export const addTodoListAC = (todoListID:string,title: string) => {
-    return {type: 'ADD-TODOLIST', title: title, todoListID: v1()} as const
+    return {type: 'ADD-TODOLIST', title: title, todoListID: todoListID } as const
 }
 
 type ChangeTodoListTitleACType = {
@@ -58,6 +58,8 @@ type ChangeTodoListTitleACType = {
     title: string,
     todoListID: string
 }
+
+
 
 export const changeTodoListTitleAC = (title: string, todoListID: string) => {
     return {type: 'CHANGE-TODOLIST-TITLE', title: title, todoListID: todoListID} as const

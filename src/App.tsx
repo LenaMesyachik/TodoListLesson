@@ -85,7 +85,9 @@ export const App = () => {
     }
 
 
+
     const changeTodoListTitle = (title: string, todoListID: string) => {
+        debugger
         dispatchTodoList(changeTodoListTitleAC(title, todoListID))
     }
 
