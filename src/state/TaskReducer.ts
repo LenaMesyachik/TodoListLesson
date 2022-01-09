@@ -17,7 +17,7 @@ export const taskReducer = (state: TasksStateType = initialState, action: Action
     switch (action.type) {
         case 'REMOVE-TASK':
             return (
-                {...state, [action.todoListID]: state[action.todoListID].filter(t => t.id !== action.todoListID)}
+                {...state, [action.todoListID]: state[action.todoListID].filter(t => t.id !== action.id)}
             )
         case 'ADD-TASK':
             return (
@@ -50,7 +50,6 @@ export const taskReducer = (state: TasksStateType = initialState, action: Action
                 }
             )
         case 'TASK-FOR-TODOLIST':
-            debugger
             return (
 
                 {...state, [action.todoListID]: []}
@@ -68,6 +67,7 @@ type RemoveTaskACType = {
     todoListID: string
 }
 export const removeTaskAC = (tID: string, todoListID: string) => {
+    debugger
     return {type: 'REMOVE-TASK', id: tID, todoListID: todoListID} as const
 }
 

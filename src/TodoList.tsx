@@ -55,7 +55,6 @@ export const TodoList = (props: PropsTodoListType) => {
             <AddItemForm addTask={addTask}/>
             <div>
                 {props.tasks.map(t => {
-                    debugger
                     const onChangeTitle = (title: string) => {
                         props.changeTaskTitle(title,t.id, props.id)
                     }
