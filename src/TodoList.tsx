@@ -24,8 +24,8 @@ type TaskType = {
     isDone: boolean,
 }
 
-export const TodoList = (props: PropsTodoListType) => {
-
+export const TodoList = React.memo((props: PropsTodoListType) => {
+    console.log('todoList called')
     const addTask = useCallback((title: string) => {
         props.addTask(title, props.id)
     }, [])
@@ -43,7 +43,13 @@ export const TodoList = (props: PropsTodoListType) => {
     }
     const onChangeTodolistTitle = (title: string) => {
         props.changeTodoListTitle (title, props.id)
-
+    }
+    let tasksForTodoList = props.tasks
+    if (props.filter === 'active') {
+        tasksForTodoList =  props.tasks.filter(t => t.isDone)
+    }
+    if (props.filter === 'completed') {
+        tasksForTodoList = props.tasks.filter(t => !t.isDone)
     }
     return (
         <div>
@@ -54,7 +60,7 @@ export const TodoList = (props: PropsTodoListType) => {
             </h3>
             <AddItemForm addTask={addTask}/>
             <div>
-                {props.tasks.map(t => {
+                {tasksForTodoList.map(t => {
                     const onChangeTitle = (title: string) => {
                         props.changeTaskTitle(title,t.id, props.id)
                     }
@@ -94,5 +100,5 @@ export const TodoList = (props: PropsTodoListType) => {
             </div>
         </div>
     )
-}
+})
 
