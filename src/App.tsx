@@ -80,16 +80,16 @@ export const App = () => {
     const removeTodoList = useCallback((id: string) => {
         dispatch(removeTodoListAC(id))
     }, [])*/
+    /*const changeTodoListTitle = useCallback((title: string, todoListID: string) => {
+    dispatch(changeTodoListTitleAC(title, todoListID))
+}, [])*/
+
     const addTodoList = useCallback((title: string) => {
         const todoListID = v1()
         dispatch(addTodoListAC(todoListID, title))
         dispatch(addTaskForTodoListAC(todoListID))
     }, [])
 
-
-    /*const changeTodoListTitle = useCallback((title: string, todoListID: string) => {
-        dispatch(changeTodoListTitleAC(title, todoListID))
-    }, [])*/
 
 
     return (
